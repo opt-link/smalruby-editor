@@ -73,8 +73,12 @@ class SourceCodesController < ApplicationController
       filename: filename
     }
 
+    srv  = ENV["FTP_Srv"]
+    user = ENV["FTP_User"]
+    pass = ENV["FTP_Pass"]
+
     begin
-      Net::FTP.open(ENV["FTP_SERVER"], ENV["FTP_CLIENT"], ENV["FTP_PASSWORD"]) do |client|
+      Net::FTP.open(srv, user, pass) do |client|
         client.put(program_path)
       end
     rescue
